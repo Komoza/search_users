@@ -8,6 +8,18 @@
 .user:hover {
     background: #2c74b3;
 }
+.user__info {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
 
 .user__text {
     color: #fff;
@@ -17,7 +29,11 @@
     color: #fff;
     text-decoration: underline;
 }
+
 .user__link-text {
     width: fit-content;
-    margin-top: 30px;
+}
+
+.user__link-text:hover {
+    opacity: .5;
 }

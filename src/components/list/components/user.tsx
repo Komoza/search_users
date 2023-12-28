@@ -16,15 +16,22 @@ export const UserComponent: React.FC<UserComponentProps> = ({ user }) => {
         <div onClick={handleClickUser} className="user">
             <p className="user__text">{user.login}</p>
             {isOpenInfo && (
-                <p className="user__link-text">
-                    <a
-                        className="user__link"
-                        href={user.html_url}
-                        target="blank"
-                    >
-                        Посмотреть на github
-                    </a>
-                </p>
+                <div className="user__info">
+                    <img
+                        className="user-avatar"
+                        src={user.avatar_url}
+                        alt="avatar"
+                    />
+                    <p className="user__link-text">
+                        <a
+                            className="user__link"
+                            href={user.html_url}
+                            target="blank"
+                        >
+                            Посмотреть на github
+                        </a>
+                    </p>
+                </div>
             )}
         </div>
     );
