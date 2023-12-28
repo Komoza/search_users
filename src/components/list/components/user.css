@@ -1,0 +1,23 @@
+.user {
+    padding: 13px 16px;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.user:hover {
+    background: #2c74b3;
+}
+
+.user__text {
+    color: #fff;
+}
+
+.user__link {
+    color: #fff;
+    text-decoration: underline;
+}
+.user__link-text {
+    width: fit-content;
+    margin-top: 30px;
+}

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/actions/types';
 import './list.css';
+import { UserComponent } from './components/user';
 
 export const UserList = () => {
     const users = useSelector((state: AppState) => state.users);
@@ -8,13 +9,13 @@ export const UserList = () => {
     return (
         <section className="users">
             {users &&
-                users.map((user, index) => (
-                    <p className="user" key={index}>
-                        <a href={user.html_url} target="blank">
-                            {user.login}
-                        </a>
-                    </p>
+                users.items.map((user, index) => (
+                    <UserComponent key={index} user={user} />
                 ))}
+
+            {users && users.total_count !== users.items.length && (
+                <button className="users__more">Загрузить еще</button>
+            )}
         </section>
     );
 };

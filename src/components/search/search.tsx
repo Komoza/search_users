@@ -13,14 +13,18 @@ export const Search = () => {
     ) => {
         e.preventDefault();
         if (refInput.current)
-            getUsers(refInput.current?.value)
-                .then((data) => {
-                    console.log(data);
-                    dispatch(setUsers(data.items));
-                })
-                .catch(() => {
-                    console.error('ошбика');
-                });
+            if (refInput.current.value) {
+                getUsers(refInput.current.value)
+                    .then((data) => {
+                        console.log(data);
+                        dispatch(setUsers(data));
+                    })
+                    .catch(() => {
+                        console.error('ошбика');
+                    });
+            } else {
+                dispatch(setUsers(null));
+            }
     };
     return (
         <search>
