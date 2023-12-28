@@ -1,0 +1,40 @@
+.search {
+    display: flex;
+    gap: 10px;
+}
+
+.search__data {
+    outline: none;
+    width: 80vw;
+    border-radius: 6px;
+    border: 0;
+    padding: 10px 15px;
+
+    font-size: 24px;
+    line-height: 26px;
+}
+
+.search__data::placeholder {
+    color: #767676;
+}
+
+.search__submit {
+    padding: 10px 20px;
+
+    border: 0;
+    background: #205295;
+    border-radius: 6px;
+    cursor: pointer;
+
+    color: #fff;
+    font-size: 24px;
+    line-height: 26px;
+}
+
+.search__submit:hover {
+    background: #144272;
+}
+
+.search__submit:active {
+    background: #2c74b3;
+}

@@ -1,0 +1,16 @@
+.users {
+    width: 80%;
+    height: calc(100vh - 106px);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user {
+    color: #fff;
+}
+
+.user:hover {
+    text-decoration: underline;
+}
