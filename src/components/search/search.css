@@ -1,4 +1,6 @@
 .search {
+    width: 100%;
+    max-width: 1280px;
     display: flex;
     gap: 10px;
 }
@@ -39,8 +41,15 @@
     background: #2c74b3;
 }
 
-.search__sort {
+.search__bottom-panel {
     margin-top: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search__sort {
     display: flex;
     gap: 5px;
 }
@@ -62,5 +71,10 @@
 }
 
 .search__sort-button:hover {
-    opacity: .8;
+    opacity: 0.8;
+}
+
+.search__total-count {
+    font-size: 18px;
+    line-height: 22px;
 }

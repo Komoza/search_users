@@ -4,10 +4,12 @@ import { Search } from './components/search/search';
 function App() {
     return (
         <div className="container">
-            <header className="header">
-                <Search />
-            </header>
-            <UserList />
+            <div className="wrapper">
+                <header className="header">
+                    <Search />
+                </header>
+                <UserList />
+            </div>
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import { getUsers } from '../../api/api';
 import './search.css';
-import { useDispatch } from 'react-redux';
-import { setUsers } from '../../store/actions/creators';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchInfo, setUsers } from '../../store/actions/creators';
+import { AppState } from '../../store/actions/types';
 
 const sorting = ['По умолчанию', 'Репозитории (убыв)', 'Репозитории (возр)'];
 
@@ -11,15 +12,23 @@ export const Search = () => {
     const refInput = useRef<HTMLInputElement | null>(null);
     const [currSort, setCurrSort] = useState<string>(sorting[0]);
 
+    const usersInfo = useSelector((state: AppState) => state.users);
+
     const handleClickSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault();
         if (refInput.current)
             if (refInput.current.value) {
-                getUsers(refInput.current.value)
+                getUsers(refInput.current.value, 1)
                     .then((data) => {
                         dispatch(setUsers(data));
+                        dispatch(
+                            setSearchInfo({
+                                nowPage: 1,
+                                searchQuery: refInput.current?.value as string,
+                            })
+                        );
                     })
                     .catch(() => {
                         console.error('ошбика');
@@ -56,14 +65,24 @@ export const Search = () => {
                     Найти
                 </button>
             </form>
-            <div className="search__sort">
-                <p className="search__sort-text">Сортировка:</p>
-                <button
-                    onClick={handleClickSorting}
-                    className="search__sort-button"
-                >
-                    {currSort}
-                </button>
+
+            <div className="search__bottom-panel">
+                <div className="search__sort">
+                    <p className="search__sort-text">Сортировка:</p>
+                    <button
+                        onClick={handleClickSorting}
+                        className="search__sort-button"
+                    >
+                        {currSort}
+                    </button>
+                </div>
+
+                {usersInfo && (
+                    <p className="search__total-count">
+                        Результат поиска: {usersInfo.items.length} /{' '}
+                        {usersInfo.total_count}
+                    </p>
+                )}
             </div>
         </search>
     );

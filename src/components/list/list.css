@@ -1,7 +1,6 @@
 .users {
+    padding-top: 140px;
     width: 80%;
-    height: calc(100vh - 106px);
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 10px;
