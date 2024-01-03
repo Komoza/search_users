@@ -38,3 +38,29 @@
 .search__submit:active {
     background: #2c74b3;
 }
+
+.search__sort {
+    margin-top: 15px;
+    display: flex;
+    gap: 5px;
+}
+
+.search__sort-text {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.search__sort-button {
+    background: none;
+    border: 0;
+
+    color: #fff;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.search__sort-button:hover {
+    opacity: .8;
+}
