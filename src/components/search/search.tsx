@@ -1,16 +1,26 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getUsers } from '../../api/api';
 import './search.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchInfo, setUsers } from '../../store/actions/creators';
 import { AppState } from '../../store/actions/types';
 
-const sorting = ['По умолчанию', 'Репозитории (убыв)', 'Репозитории (возр)'];
+interface Sorting {
+    name: string;
+    sort: null | string;
+    order: null | string;
+}
+
+const sorting: Sorting[] = [
+    { name: 'По умолчанию', sort: null, order: null },
+    { name: 'Репозитории (убыв)', sort: 'repositories', order: 'desc' },
+    { name: 'Репозитории (возр)', sort: 'repositories', order: 'asc' },
+];
 
 export const Search = () => {
     const dispatch = useDispatch();
     const refInput = useRef<HTMLInputElement | null>(null);
-    const [currSort, setCurrSort] = useState<string>(sorting[0]);
+    const [currSort, setCurrSort] = useState<Sorting>(sorting[0]);
 
     const usersInfo = useSelector((state: AppState) => state.users);
 
@@ -20,13 +30,20 @@ export const Search = () => {
         e.preventDefault();
         if (refInput.current)
             if (refInput.current.value) {
-                getUsers(refInput.current.value, 1)
+                getUsers(
+                    refInput.current.value,
+                    1,
+                    currSort.sort,
+                    currSort.order
+                )
                     .then((data) => {
                         dispatch(setUsers(data));
                         dispatch(
                             setSearchInfo({
                                 nowPage: 1,
                                 searchQuery: refInput.current?.value as string,
+                                sort: currSort.sort,
+                                order: currSort.order,
                             })
                         );
                     })
@@ -40,13 +57,34 @@ export const Search = () => {
 
     const handleClickSorting = () => {
         const idx = sorting.indexOf(currSort);
-
         if (idx !== sorting.length - 1) {
             setCurrSort(sorting[idx + 1]);
         } else {
             setCurrSort(sorting[0]);
         }
     };
+
+    useEffect(() => {
+        if (refInput.current?.value) {
+            getUsers(refInput.current.value, 1, currSort.sort, currSort.order)
+                .then((data) => {
+                    dispatch(setUsers(data));
+                    dispatch(
+                        setSearchInfo({
+                            nowPage: 1,
+                            searchQuery: refInput.current?.value as string,
+                            sort: currSort.sort,
+                            order: currSort.order,
+                        })
+                    );
+                })
+                .catch(() => {
+                    console.error('ошбика');
+                });
+        } else {
+            dispatch(setUsers(null));
+        }
+    }, [currSort, dispatch]);
 
     return (
         <search>
@@ -73,7 +111,7 @@ export const Search = () => {
                         onClick={handleClickSorting}
                         className="search__sort-button"
                     >
-                        {currSort}
+                        {currSort.name}
                     </button>
                 </div>
 

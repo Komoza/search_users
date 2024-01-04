@@ -22,7 +22,12 @@ export const UserComponent: React.FC<UserComponentProps> = ({ user }) => {
                         src={user.avatar_url}
                         alt="avatar"
                     />
-                    <p className="user__link-text">
+                    <p
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                        className="user__link-text"
+                    >
                         <a
                             className="user__link"
                             href={user.html_url}

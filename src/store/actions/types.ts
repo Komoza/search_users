@@ -10,6 +10,8 @@ export interface UserApi {
 export interface SearchInfo {
     nowPage: number;
     searchQuery: string;
+    sort:null | string;
+    order: null | string;
 }
 
 export interface AppState {

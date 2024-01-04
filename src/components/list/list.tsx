@@ -13,7 +13,12 @@ export const UserList = () => {
 
     const handleClickLoadMore = () => {
         if (searchInfo && users) {
-            getUsers(searchInfo.searchQuery, searchInfo.nowPage + 1)
+            getUsers(
+                searchInfo.searchQuery,
+                searchInfo.nowPage + 1,
+                searchInfo.sort,
+                searchInfo.order
+            )
                 .then((data) => {
                     dispatch(
                         setUsers({
@@ -23,8 +28,8 @@ export const UserList = () => {
                     );
                     dispatch(
                         setSearchInfo({
+                            ...searchInfo,
                             nowPage: searchInfo.nowPage + 1,
-                            searchQuery: searchInfo.searchQuery,
                         })
                     );
                 })
