@@ -41,12 +41,12 @@ export const UserList = () => {
 
     return (
         <section className="users">
-            {users &&
+            {users && users.items &&
                 users.items.map((user) => (
                     <UserComponent key={user.id} user={user} />
                 ))}
 
-            {users && users.total_count !== users.items.length && (
+            {users && users.items && users.total_count !== users.items.length && (
                 <button onClick={handleClickLoadMore} className="users__more">
                     Загрузить еще
                 </button>

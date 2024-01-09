@@ -38,7 +38,6 @@ export const Search = () => {
                 )
                     .then((data) => {
                         dispatch(setUsers(data));
-                        console.log(data);
                         dispatch(
                             setSearchInfo({
                                 nowPage: 1,
@@ -116,7 +115,7 @@ export const Search = () => {
                     </button>
                 </div>
 
-                {usersInfo && (
+                {usersInfo && usersInfo.items && (
                     <p className="search__total-count">
                         Результат поиска: {usersInfo.items.length} /{' '}
                         {usersInfo.total_count}
