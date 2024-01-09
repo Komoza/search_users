@@ -2,6 +2,7 @@ export interface User {
     login: string;
     html_url: string;
     avatar_url: string;
+    id: number;
 }
 export interface UserApi {
     items: [User];

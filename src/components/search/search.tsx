@@ -38,6 +38,7 @@ export const Search = () => {
                 )
                     .then((data) => {
                         dispatch(setUsers(data));
+                        console.log(data);
                         dispatch(
                             setSearchInfo({
                                 nowPage: 1,

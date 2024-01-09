@@ -42,8 +42,8 @@ export const UserList = () => {
     return (
         <section className="users">
             {users &&
-                users.items.map((user, index) => (
-                    <UserComponent key={index} user={user} />
+                users.items.map((user) => (
+                    <UserComponent key={user.id} user={user} />
                 ))}
 
             {users && users.total_count !== users.items.length && (
